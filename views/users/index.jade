@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    #main
+        h2.
+             #{title}
+        table
+            tr
+                th.
+                    Username
+                th. 
+                    Display Name
+                th.
+                    ID
+            - each user, i in users
+                tr
+                    td
+                        = user.username
+                    td
+                        = user.displayname
+                    td
+                        = user._id

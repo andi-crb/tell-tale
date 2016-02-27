@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    #main
+        h2.
+            #{title}
+        form#formAddBlob(name="addstory",method="post",action="/stories")
+            p Title: 
+                input#inputtTitle(type="text", placeholder="title", name="title")
+            p Author: 
+                input#inputAuthor(type="text", placeholder="author", name="author")
+            p URL: 
+                input#inputURL(type="text", placeholder="url", name="url")
+            p
+                button#btnSubmit(type="submit") submit

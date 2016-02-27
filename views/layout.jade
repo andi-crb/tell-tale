@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    h1.
+      Tell Tale
+    ul
+      a(href='/stories')
+        li.
+          Home
+      a(href='/stories/new')
+        li.
+          Add a story
+      a(href='/stories/random')
+        li.
+          Random story
+    block content

@@ -1,0 +1,57 @@
+/* https://coolors.co/app/e6eed6-8d6a9f-bbc5aa-00a878-090c02 */
+/* lightest, purple, pale, green, darkest */
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #090c02;
+  background-color: #BBc5aa;
+  margin: 0px;
+}
+
+h1 {
+  background-color: #8D6A9F;
+  color: #090c02;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  font-size: 100px;
+  margin: 0px;
+}
+
+td {
+  background-color: #e6eed6;
+  padding: 3px;
+}
+
+th {
+  background-color: #8D6A9F;
+  padding: 3px;
+}
+
+a {
+  color: #00A878;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #090c02;
+  color: #00A878;
+  font-size: 18px;
+}
+
+li {
+  display: inline-block;
+  width: 120px;
+  padding: 10px;
+  border-right: 2px solid #8D6A9F;
+  text-align: center;
+}
+
+li a {
+  text-decoration: none;
+}
+
+#main {
+  padding: 25px;
+}
