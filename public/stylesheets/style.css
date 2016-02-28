@@ -2,19 +2,34 @@
 /* lightest, purple, pale, green, darkest */
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
   color: #090c02;
   background-color: #BBc5aa;
   margin: 0px;
+  font-size: 14px;
+}
+
+#loginheader {
+  background-color: #8D6A9F;
+  color: #090c02;
+  text-align: right;
+  margin: 0px;
+  padding: 0px;
+}
+
+#loginheader p {
+  margin: 0px;
+  padding: 0px;
 }
 
 h1 {
   background-color: #8D6A9F;
   color: #090c02;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Special Elite', cursive;
   text-align: center;
   font-size: 100px;
   margin: 0px;
+  padding-top: 40px;
 }
 
 td {
@@ -46,12 +61,22 @@ li {
   padding: 10px;
   border-right: 2px solid #8D6A9F;
   text-align: center;
+  font-weight: bold;
 }
 
 li a {
   text-decoration: none;
 }
 
+.search {
+  padding: 10px;
+  text-align: right;
+  float: right;
+  vertical-align: center;
+}
+
 #main {
   padding: 25px;
 }
+
+

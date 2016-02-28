@@ -2,7 +2,11 @@ var express = require('express'),
 router = express.Router(),
     mongoose = require('mongoose'), //mongo connection
     bodyParser = require('body-parser'), //parses information from POST
-    methodOverride = require('method-override'); //used to manipulate POST
+    methodOverride = require('method-override'); 
+    var passport = require('passport');
+    var User = require('../model/users');
+
+//used to manipulate POST
 
 //Any requests to this controller must pass through this 'use' function
 //Copy and pasted from method-override
@@ -32,7 +36,8 @@ router.route('/')
                       html: function(){
                         res.render('stories/index', {
                           title: 'All Stories',
-                          "stories" : stories
+                          "stories" : stories,
+                          user: req.user
                         });
                       },
                     //JSON response will show all stories in JSON format
@@ -95,15 +100,15 @@ router.route('/random')
             var id = chosen._id
             console.log(id)
             res.redirect('/stories/' + id)
-                    }
+          }
         });
       })    
 
 
-/* GET New Story page. */
-router.get('/new', function(req, res) {
-  res.render('stories/new', { title: 'Add New Story' });
-});
+    /* GET New Story page. */
+    router.get('/new', function(req, res) {
+      res.render('stories/new', { title: 'Add New Story', user: req.user });
+    });
 
 // route middleware to validate :id
 router.param('id', function(req, res, next, id) {
@@ -130,6 +135,7 @@ router.param('id', function(req, res, next, id) {
             //console.log(story);
             // once validation is done save the new item in the req
             req.id = id;
+
             // go to the next thing
             next(); 
           } 
@@ -146,7 +152,8 @@ router.route('/:id')
       res.format({
         html: function(){
           res.render('stories/show', {
-            "story" : story
+            "story" : story,
+            user: req.user
           });
         },
         json: function(){
@@ -167,12 +174,14 @@ router.route('/:id/edit')
         } else {
               //Return the story
               console.log('GET Retrieving ID: ' + story._id);
+              console.log(req.user);
               res.format({
                   //HTML response will render the 'edit.jade' template
                   html: function(){
                    res.render('stories/edit', {
                     title: 'Story' + story._id,
-                    "story" : story
+                    "story" : story,
+                    user: req.user
                   });
                  },
                    //JSON response will return the JSON output

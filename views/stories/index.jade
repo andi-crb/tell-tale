@@ -37,3 +37,10 @@ block content
                         a(href='/stories/#{story._id}/edit') Edit
                     td
                         a(href='/stories/#{story._id}') Show
+    if (!user)
+      a(href="/login") Login
+      br
+      a(href="/register") Register
+    if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/logout") Logout

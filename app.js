@@ -9,6 +9,8 @@ var stories = require('./routes/story');
 var story = require('./model/stories');
 var users = require('./routes/user')
 var user = require('./model/users')
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var app = express();
@@ -24,11 +26,24 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/stories', stories);
 app.use('/users', users);
+
+// passport config
+var User = require('./model/users');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,9 +75,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-//random generator
-var count = db.stories
-console.log(count)
 
 module.exports = app;

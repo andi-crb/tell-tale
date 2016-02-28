@@ -3,8 +3,16 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    link(href='https://fonts.googleapis.com/css?family=Special+Elite', rel='stylesheet', type='text/css')
   body
+    #loginheader
+      if (!user)
+        a(href="/login") Login
+        br
+        a(href="/register") Register
+      if (user)
+        p You are currently logged in as #{user.username}
+        a(href="/logout") Logout
     h1.
       Tell Tale
     ul
@@ -17,4 +25,8 @@ html
       a(href='/stories/random')
         li.
           Random story
+        span.search
+          input#search(type='search')
+          button.
+            Search
     block content
