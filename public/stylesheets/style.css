@@ -14,7 +14,7 @@ body {
   color: #090c02;
   text-align: right;
   margin: 0px;
-  padding: 0px;
+  padding: 10px;
 }
 
 #loginheader p {
@@ -46,7 +46,7 @@ a {
   color: #00A878;
 }
 
-ul {
+#menubar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -55,7 +55,7 @@ ul {
   font-size: 18px;
 }
 
-li {
+#menubar li {
   display: inline-block;
   width: 120px;
   padding: 10px;
@@ -64,8 +64,24 @@ li {
   font-weight: bold;
 }
 
+#loginheader ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#loginheader li{
+  display: inline-block;
+  padding: 10px;
+  text-align: right;
+}
+
 li a {
   text-decoration: none;
+}
+
+#loginheader a {
+  color: #090c02;
 }
 
 .search {

@@ -6,3 +6,18 @@ block content
           #{story.title}
       p Author: #{story.author}
       p URL: #{story.url}
+      h2.
+          Review this story
+      form#formAddReview(name="addreview",method="post",action="/reviews")
+          p Story ID: 
+              input#inputReview(type="text", placeholder="reviewstory", name="reviewstory", value='#{story.id}' readonly)
+          p Review: 
+              input#inputReview(type="text", placeholder="review", name="review")
+          p Status: 
+              input#inputStatus(type="text", placeholder="status", name="status")
+          p Rating: 
+              input#inputReview(type="number", placeholder="rating", name="rating", min="1" max="5")
+          p Date Read: 
+              input#inputDateRead(type="date", placeholder="dateread", name="dateread")
+          p
+            button#btnSubmit(type="submit") submit

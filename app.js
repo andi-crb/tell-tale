@@ -9,6 +9,8 @@ var stories = require('./routes/story');
 var story = require('./model/stories');
 var users = require('./routes/user')
 var user = require('./model/users')
+var reviews = require('./routes/review')
+var review = require('./model/reviews')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -21,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/stories', stories);
 app.use('/users', users);
+app.use('/reviews', reviews);
 
 // passport config
 var User = require('./model/users');
@@ -75,5 +78,16 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+//search button
+// document.getElementById("urlSearch").addEventListener("click", function(){
+//     console.log("Button clicked!")
+// });
+
+app.post('/match', function(req,res){
+  console.log(req.body);
+})
+
+console.log(db)
 
 module.exports = app;

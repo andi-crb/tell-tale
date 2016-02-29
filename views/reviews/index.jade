@@ -7,40 +7,47 @@ block content
         table
             tr
                 th.
-                    Title
+                    Status
                 th. 
-                    Author
+                    Review
                 th.
-                    URL
+                    Rating
                 th.
-                    ID
+                    Date Read
                 th.
                     Date Added
                 th.
+                    User ID
+                th.
+                    Story ID
                 th.
                 th.
-            - each story, i in stories
+                th.
+            - each review, i in reviews
                 tr
                     td
-                        = story.title
+                        = review.status
                     td
-                        = story.author
+                        = review.review
                     td
-                        a(href='#{story.url}') 
-                            = story.url
+                        = review.rating
                     td
-                        = story._id
+                        = review.dateread
                     td
-                        = story.dateAdded
+                        = review.dateAdded
                     td
-                        form(action='/stories/#{story._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+                        = review.reviewuser
+                    td
+                        = review.reviewstory
+                    td
+                        form(action='/reviews/#{review._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
                             input(type='hidden',value='DELETE',name='_method')
                             button(type='submit').
                                 Delete
                     td 
-                        a(href='/stories/#{story._id}/edit') Edit
+                        a(href='/reviews/#{review._id}/edit') Edit
                     td
-                        a(href='/stories/#{story._id}') Show
+                        a(href='/reviews/#{review._id}') Show
     if (!user)
       a(href="/login") Login
       br

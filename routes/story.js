@@ -49,17 +49,51 @@ router.route('/')
               });
       })
 
+// router.route('/match')
+//     //GET all stories
+//     .get(function(req, res, next) {
+//       console.log(req)
+//         //retrieve all stories from Monogo
+//         mongoose.model('Story').find({url: value}, function (err, stories) {
+          
+//           if (err) {
+//             return console.error(err);
+//           } else {
+//                   //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
+//                   res.format({
+//                       //HTML response will render the index.jade file in the views/stories folder. We are also setting "stories" to be an accessible variable in our jade view
+//                       html: function(){
+//                         res.render('stories/index', {
+//                           title: 'The Url you have entered matches the following stories',
+//                           "stories" : stories,
+//                           user: req.user
+//                         });
+//                       },
+//                     //JSON response will show all stories in JSON format
+//                     json: function(){
+//                       res.json(infophotos);
+//                     }
+//                   });
+//                 }     
+//               });
+//       })
+
+
+
     //POST a new story
     .post(function(req, res) {
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
+        var id = req.body._id
         var title = req.body.title;
         var author = req.body.author;
         var url = req.body.url;
         //call the create function for our database
         mongoose.model('Story').create({
+          id : id,
           title : title,
           author : author,
-          url : url
+          url : url,
+          dateAdded: new Date
         }, function (err, story) {
           if (err) {
             res.send("There was a problem adding the information to the database.");
@@ -83,6 +117,11 @@ router.route('/')
               })
 });
 
+
+    /* ADD New Story page (search by URL. */
+    router.get('/add', function(req, res) {
+      res.render('stories/add', { title: 'Check Story', user: req.user });
+    });
 
 //Get a RANDOM story
 router.route('/random')
@@ -163,6 +202,7 @@ router.route('/:id')
     }
   });
 });
+
 
 router.route('/:id/edit')
   //GET the individual story by Mongo ID

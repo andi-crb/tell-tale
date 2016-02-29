@@ -3,8 +3,9 @@ var reviewSchema = new mongoose.Schema({
   reviewuser: String,
   reviewstory: String,
   status: String,
-  rating: Number
-  dateadded: Date,
+  review: String,
+  rating: Number,
+  dateAdded: Date,
   dateread: Date
 })
 mongoose.model('Review', reviewSchema)

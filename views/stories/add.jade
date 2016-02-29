@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    #main
+        h2.
+            #{title}
+        form#formSearchStory(name="searchstory",method="search",action="/match")
+            p URL: 
+                input#inputURL(type="text", placeholder="url", name="url")
+            p
+                div(data-role='fieldcontain')   
+                input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')

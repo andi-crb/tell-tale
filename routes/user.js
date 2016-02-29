@@ -1,8 +1,8 @@
-var express = require('express'),
-router = express.Router(),
-    mongoose = require('mongoose'), //mongo connection
-    bodyParser = require('body-parser'), //parses information from POST
-    methodOverride = require('method-override'); //used to manipulate POST
+var express = require('express')
+var router = express.Router()
+var mongoose = require('mongoose') //mongo connection
+var bodyParser = require('body-parser') //parses information from POST
+var methodOverride = require('method-override'); //used to manipulate POST
 
 //Any requests to this controller must pass through this 'use' function
 //Copy and pasted from method-override
@@ -23,26 +23,26 @@ router.route('/')
     .get(function(req, res, next) {
         //retrieve all users from Monogo
         mongoose.model('User').find({}, function (err, users) {
-              if (err) {
-                  return console.error(err);
-              } else {
+          if (err) {
+            return console.error(err);
+          } else {
                   //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
                   res.format({
                       //HTML response will render the index.jade file in the views/users folder. We are also setting "users" to be an accessible variable in our jade view
-                    html: function(){
+                      html: function(){
                         res.render('users/index', {
-                              title: 'All Users',
-                              "users" : users
-                          });
-                    },
+                          title: 'All Users',
+                          "users" : users
+                        });
+                      },
                     //JSON response will show all users in JSON format
                     json: function(){
-                        res.json(infophotos);
+                      res.json(infophotos);
                     }
-                });
-              }     
-        });
-    })
+                  });
+                }     
+              });
+      })
     //POST a new user
     .post(function(req, res) {
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
@@ -50,35 +50,29 @@ router.route('/')
         var displayname = req.body.displayname;
         //call the create function for our database
         mongoose.model('User').create({
-            username : username,
-            displayname : displayname,
+          username : username,
+          displayname : displayname,
         }, function (err, user) {
-              if (err) {
-                  res.send("There was a problem adding the information to the database.");
-              } else {
+          if (err) {
+            res.send("There was a problem adding the information to the database.");
+          } else {
                   //User has been created
                   console.log('POST creating new user: ' + user);
                   res.format({
                       //HTML response will set the location and redirect back to the home page. You could also create a 'success' page if that's your thing
-                    html: function(){
+                      html: function(){
                         // If it worked, set the header so the address bar doesn't still say /adduser
                         res.location("users");
                         // And forward to success page
                         res.redirect("/users");
-                    },
+                      },
                     //JSON response will show the newly created user
                     json: function(){
-                        res.json(user);
+                      res.json(user);
                     }
-                });
-              }
-        })
-    });
-
-
-/* GET New User page. */
-router.get('/new', function(req, res) {
-  res.render('users/new', { title: 'Add New User' });
+                  });
+                }
+              })
 });
 
 // route middleware to validate :id
@@ -132,6 +126,8 @@ router.route('/:id')
     }
   });
 });
+
+
 
 router.route('/:id/edit')
   //GET the individual user by Mongo ID

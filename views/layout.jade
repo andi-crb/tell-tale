@@ -7,26 +7,32 @@ html
   body
     #loginheader
       if (!user)
-        a(href="/login") Login
-        br
-        a(href="/register") Register
+        ul
+          li
+            a(href="/login") Login
+          li
+            a(href="/register") Register
       if (user)
-        p You are currently logged in as #{user.username}
-        a(href="/logout") Logout
+        ul
+          li.
+            You are currently logged in as #{user.username}
+          li
+            a(href="/logout") Logout
     h1.
       Tell Tale
-    ul
-      a(href='/stories')
-        li.
-          Home
-      a(href='/stories/new')
-        li.
-          Add a story
-      a(href='/stories/random')
-        li.
-          Random story
-        span.search
-          input#search(type='search')
-          button.
-            Search
+    #menubar
+      ul
+        a(href='/stories')
+          li.
+            Home
+        a(href='/stories/new')
+          li.
+            Add a story
+        a(href='/stories/random')
+          li.
+            Random story
+          span.search
+            input#search(type='search')
+            button.btn.btn-default(type='submit') Search
+              Search
     block content
