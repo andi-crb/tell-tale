@@ -1,17 +1,17 @@
-var express = require('express'),
-router = express.Router(),
-    mongoose = require('mongoose'), //mongo connection
-    bodyParser = require('body-parser'), //parses information from POST
-    methodOverride = require('method-override'); 
-    var passport = require('passport');
-    var User = require('../model/users');
+var express = require('express')
+var router = express.Router()
+var mongoose = require('mongoose') //mongo connection
+var bodyParser = require('body-parser') //parses information from POST
+var methodOverride = require('method-override'); 
+var passport = require('passport');
+var User = require('../model/users');
+var moment = require('moment')
 
-//used to manipulate POST
 
 //Any requests to this controller must pass through this 'use' function
-//Copy and pasted from method-override
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res){
+  console.log(req)
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         // look in urlencoded POST bodies and delete it
         var method = req.body._method
@@ -23,6 +23,7 @@ router.use(methodOverride(function(req, res){
 //build the REST operations at the base for stories
 //this will be accessible from http://127.0.0.1:3000/stories if the default route for / is left unchanged
 router.route('/')
+
     //GET all stories
     .get(function(req, res, next) {
         //retrieve all stories from Monogo
@@ -48,35 +49,6 @@ router.route('/')
                 }     
               });
       })
-
-// router.route('/match')
-//     //GET all stories
-//     .get(function(req, res, next) {
-//       console.log(req)
-//         //retrieve all stories from Monogo
-//         mongoose.model('Story').find({url: value}, function (err, stories) {
-          
-//           if (err) {
-//             return console.error(err);
-//           } else {
-//                   //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
-//                   res.format({
-//                       //HTML response will render the index.jade file in the views/stories folder. We are also setting "stories" to be an accessible variable in our jade view
-//                       html: function(){
-//                         res.render('stories/index', {
-//                           title: 'The Url you have entered matches the following stories',
-//                           "stories" : stories,
-//                           user: req.user
-//                         });
-//                       },
-//                     //JSON response will show all stories in JSON format
-//                     json: function(){
-//                       res.json(infophotos);
-//                     }
-//                   });
-//                 }     
-//               });
-//       })
 
 
 
@@ -143,6 +115,19 @@ router.route('/random')
         });
       })    
 
+//Get a SPECIFIC story
+router.route('/specific')
+    //GET all stories
+    .get(function(req, res, next) {
+        //retrieve all stories from Monogo
+        mongoose.model('Story').find({author: 'A.J. Fitzwater'}, function (err, stories) {
+            for (i =0; i < stories.length; i++){
+              console.log(stories[i].title)
+            }
+            res.redirect("/stories")
+        });
+      })  
+
 
     /* GET New Story page. */
     router.get('/new', function(req, res) {
@@ -183,14 +168,29 @@ router.param('id', function(req, res, next, id) {
 
 router.route('/:id')
 .get(function(req, res) {
+
+  // Story.find(id, function (err, story) {
+  //   res.render({ story: story })
+  // })
+
+  // {
+  //   find: function (id, callback) {
+  //     mongoose.model f =>
+  //      callback(null, story)
+  //   }
+  // }
+
   mongoose.model('Story').findById(req.id, function (err, story) {
     if (err) {
       console.log('GET Error: There was a problem retrieving: ' + err);
     } else {
       console.log('GET Retrieving ID: ' + story._id);
+      var now = moment().format("YYYY-MM-DD");
+      console.log(now)
       res.format({
         html: function(){
           res.render('stories/show', {
+            "moment" : now,
             "story" : story,
             user: req.user
           });

@@ -14,9 +14,12 @@ var review = require('./model/reviews')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
 var routes = require('./routes/index');
 var app = express();
 
+var moment = require('moment');
+console.log(moment().format());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -88,6 +91,8 @@ app.post('/match', function(req,res){
   console.log(req.body);
 })
 
-console.log(db)
+
+
+// console.log(user.db.base.models.Story.collection)
 
 module.exports = app;

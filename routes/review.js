@@ -1,12 +1,13 @@
-var express = require('express'),
-router = express.Router(),
-    mongoose = require('mongoose'), //mongo connection
-    bodyParser = require('body-parser'), //parses information from POST
+var express = require('express')
+var router = express.Router()
+var mongoose = require('mongoose')
+var bodyParser = require('body-parser'), //parses information from POST
     methodOverride = require('method-override'); 
     var passport = require('passport');
     var User = require('../model/users');
 
 //used to manipulate POST
+
 
 //Any requests to this controller must pass through this 'use' function
 //Copy and pasted from method-override

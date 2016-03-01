@@ -18,6 +18,6 @@ block content
           p Rating: 
               input#inputReview(type="number", placeholder="rating", name="rating", min="1" max="5")
           p Date Read: 
-              input#inputDateRead(type="date", placeholder="dateread", name="dateread")
+              input#inputDateRead(type="date", name="dateread", value="#{moment}")
           p
             button#btnSubmit(type="submit") submit
